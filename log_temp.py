@@ -47,11 +47,9 @@ writer = csv.writer(fp)
 ts = datetime.utcnow()
 ts = ts.replace(second=0, microsecond=0)
 
-results = []
 result = {}
 
 for t in temperatures(client):
-    results.append(t)
     result["%s-%s" % (t['id'], t['name'])] = [t['temp'], t['target']]
 
 header = []
