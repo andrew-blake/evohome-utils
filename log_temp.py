@@ -49,8 +49,8 @@ ts = ts.replace(second=0, microsecond=0)
 
 result = {}
 
-for t in temperatures(client):
-    result["%s-%s" % (t['id'], t['name'])] = [t['temp'], t['target']]
+for t in client.temperatures():
+    result["%s-%s" % (t['id'], t['name'])] = [t['temp'], t['setpoint']]
 
 header = []
 header.append('ts')
