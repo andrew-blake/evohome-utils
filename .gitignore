@@ -3,3 +3,4 @@ config.py
 *log
 *csv
 .idea
+*.xls*
