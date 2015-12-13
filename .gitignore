@@ -4,3 +4,5 @@ config.py
 *csv
 .idea
 *.xls*
+*.swp
+*.json
