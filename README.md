@@ -1,4 +1,5 @@
-evohome-monitor
-===============
+andrew-blake/evohome-utils
+==========================
 
-Allows you to log your evohome zones' actual and target temperatures.
+* Perform logging of your EvoHome thermostat actual and target temperatures.
+* Backup and restore weekly setpoint schedules
