@@ -1,0 +1,21 @@
+filename = 'zone-measurements.csv'
+
+zones = [
+    '_DHW',
+    'Living room',
+    'Dining room',
+    'Kitchen',
+    'Hall',
+    'Landing',
+    'Bed1',
+    'Bed2',
+    'Bed3',
+    'Bathroom',
+]
+
+db_name = "evohome"
+influx_host = "localhost"
+influx_port = 8086
+influx_user = "username"
+influx_password = "password"
+
