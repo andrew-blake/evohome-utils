@@ -48,7 +48,7 @@ except InfluxDBClientError:
 
 row_num = 0
 
-with open(filename, 'rb') as csv_file:
+with open(hist_filename, 'rb') as csv_file:
     csv_reader = csv.reader(csv_file)
     for row in csv_reader:
 
