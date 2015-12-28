@@ -15,7 +15,7 @@ except:
     sys.exit()
 
 
-client = EvohomeClient(username, password, debug=True)
+client = EvohomeClient(username, password, debug=False)
 
 def temperatures(client, location=None):
         status = client.status(location)
