@@ -3,4 +3,4 @@
 SHELL=/bin/bash
 MAIL=root
 
-*/5 * * * * root /home/ubuntu/evo/log_temp.py 2>&1 > /home/ubuntu/evo/evohome.log
+*/1 * * * * root /home/ubuntu/evo/log_temp.py 2>&1 > /home/ubuntu/evo/evohome.log
