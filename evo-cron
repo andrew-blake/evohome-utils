@@ -1,6 +1,7 @@
 # /etc/cron.d/evo-cron
 #
 SHELL=/bin/bash
-MAIL=root
+MAIL=""
+#MAIL=root
 
-*/1 * * * * root /home/ubuntu/evo/log_temp.py 2>&1 > /home/ubuntu/evo/evohome.log
+*/1 * * * * root /home/ubuntu/evo/log_temp.py > /home/ubuntu/evo/evohome.log 2>&1 || true
