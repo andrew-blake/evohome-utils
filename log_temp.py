@@ -115,7 +115,7 @@ pprint(result)
 data = []
 time = row[0]
 
-for zone_num in range(0,11):
+for zone_num in range(0,13):
 
     temp_actual = row[zone_num*2 + 1]
     temp_target = row[zone_num*2 + 2]
