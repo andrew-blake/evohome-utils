@@ -27,9 +27,9 @@ def prep_record(time, zone, actual, target):
         },
         "time": time,
         "fields": {
-            "value": float(actual)
+            "value": float(actual) if actual is not None else None
         }
-    }
+    } if actual is not None else None
 
     if target == '' or target == -1:
         print "setting target to: -1 for %s" % zone
@@ -42,9 +42,9 @@ def prep_record(time, zone, actual, target):
         },
         "time": time,
         "fields": {
-            "value": float(target)
+            "value": float(target) if target is not None else None
         }
-    }
+    } if target is not None else None
 
     return record_actual, record_target
 
@@ -122,8 +122,11 @@ for zone_num in range(0,13):
     zone_name = zones[zone_num]
 
     record_actual, record_target = prep_record(time, zone_name, temp_actual, temp_target)
-    data.append(record_actual)
-    data.append(record_target)
+
+    if record_actual:
+        data.append(record_actual)
+    if record_target:
+        data.append(record_target)
 
     print "%s : %s (%s, %s)" % (time, zone_name, temp_actual, temp_target)
 
