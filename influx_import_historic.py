@@ -13,9 +13,9 @@ def prep_record(time, zone, actual, target):
         },
         "time": time,
         "fields": {
-            "value": float(actual)
+            "value": float(actual) if actual is not None or actual != '' else None
         }
-    }
+    } if actual is not None else None
 
     if target == '' or target == -1:
         print "setting target to: -1 for %s" % zone
@@ -28,11 +28,25 @@ def prep_record(time, zone, actual, target):
         },
         "time": time,
         "fields": {
-            "value": float(target)
+            "value": float(target) if target is not None or target != '' else None
         }
-    }
+    } if target is not None else None
 
-    return record_actual, record_target
+    record_delta = None
+    if record_actual is not None and record_target is not None:
+
+        record_delta = {
+            "measurement": "zone_temp.delta",
+            "tags": {
+                "zone": zone,
+            },
+            "time": time,
+            "fields": {
+                "value": float(actual - target)
+            }
+        }
+
+    return record_actual, record_target, record_delta
 
 
 client = InfluxDBClient(influx_host, influx_port, influx_user, influx_password, db_name)
@@ -65,9 +79,14 @@ with open(hist_filename, 'rb') as csv_file:
             temp_target = row[zone_num*2 + 2]
             zone_name = zones[zone_num]
 
-            record_actual, record_target = prep_record(time, zone_name, temp_actual, temp_target)
-            data.append(record_actual)
-            data.append(record_target)
+            record_actual, record_target, record_delta = prep_record(time, zone_name, temp_actual, temp_target)
+
+            if record_actual:
+                data.append(record_actual)
+            if record_target:
+                data.append(record_target)
+            if record_delta:
+                data.append(record_delta)
 
             print "%s : %s (%s, %s)" % (time, zone_name, temp_actual, temp_target)
 
