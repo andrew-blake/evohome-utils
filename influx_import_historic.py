@@ -6,7 +6,12 @@ from influxdb.client import InfluxDBClientError
 from influx_config import *
 
 def prep_record(time, zone, actual, target):
-    record_actual = {
+    record_actual = None
+    record_target = None
+    record_delta = None
+
+    try:
+      record_actual = {
         "measurement": "zone_temp.actual",
         "tags": {
             "zone": zone,
@@ -16,12 +21,15 @@ def prep_record(time, zone, actual, target):
             "value": float(actual) if actual is not None or actual != '' else None
         }
     } if actual is not None else None
+    except:
+      pass
 
-    if target == '' or target == -1:
+    try:
+      if target == '' or target == -1:
         print "setting target to: -1 for %s" % zone
         target = -1.0
 
-    record_target = {
+      record_target = {
         "measurement": "zone_temp.target",
         "tags": {
             "zone": zone,
@@ -31,9 +39,11 @@ def prep_record(time, zone, actual, target):
             "value": float(target) if target is not None or target != '' else None
         }
     } if target is not None else None
+    except:
+      pass
 
-    record_delta = None
-    if record_actual is not None and record_target is not None:
+    try:
+      if record_actual is not None and record_target is not None:
 
         record_delta = {
             "measurement": "zone_temp.delta",
@@ -42,9 +52,11 @@ def prep_record(time, zone, actual, target):
             },
             "time": time,
             "fields": {
-                "value": float(actual - target)
+                "value": float(actual) - float(target)
             }
         }
+    except:
+      pass
 
     return record_actual, record_target, record_delta
 
