@@ -46,7 +46,21 @@ def prep_record(time, zone, actual, target):
         }
     } if target is not None else None
 
-    return record_actual, record_target
+    record_delta = None
+    if record_actual is not None and record_target is not None:
+
+        record_delta = {
+            "measurement": "zone_temp.delta",
+            "tags": {
+                "zone": zone,
+            },
+            "time": time,
+            "fields": {
+                "value": float(actual - target)
+            }
+        }
+
+    return record_actual, record_target, record_delta
 
 
 influx_client = InfluxDBClient(influx_host, influx_port, influx_user, influx_password, db_name)
@@ -71,7 +85,7 @@ def temperatures(client, location=None):
                     'id': zone['zoneId'],
                     'name': zone['name'],
                     'temp': zone['temperatureStatus']['temperature'],
-                    'target': zone['heatSetpointStatus']['targetTemperature']
+                    'target': zone['heatSetpointStatus']['targetTemperature'],
                   }
 
 exists = os.path.isfile(filename)
@@ -121,12 +135,14 @@ for zone_num in range(0,13):
     temp_target = row[zone_num*2 + 2]
     zone_name = zones[zone_num]
 
-    record_actual, record_target = prep_record(time, zone_name, temp_actual, temp_target)
+    record_actual, record_target, record_delta = prep_record(time, zone_name, temp_actual, temp_target)
 
     if record_actual:
         data.append(record_actual)
     if record_target:
         data.append(record_target)
+    if record_delta:
+        data.append(record_delta)
 
     print "%s : %s (%s, %s)" % (time, zone_name, temp_actual, temp_target)
 
