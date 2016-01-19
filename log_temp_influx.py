@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from evo import evo_utils
-from influx import influx_utils
+from evo import influx_utils
 
 
 def log_temperatures():
