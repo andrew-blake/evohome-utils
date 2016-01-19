@@ -3,3 +3,4 @@
 username='username'
 password='password'
 filename='/tmp/zone-measurements.csv'
+dhw_target = 60

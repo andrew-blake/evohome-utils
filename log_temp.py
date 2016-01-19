@@ -9,62 +9,10 @@ import sys
 from evohomeclient2 import EvohomeClient
 
 try:
-    from config import username, password, filename
+    from config import username, password, filename, dhw_target
 except:
     print "Please configure config.py"
     sys.exit()
-
-from influx_config import *
-from influxdb import InfluxDBClient
-from influxdb.client import InfluxDBClientError
-
-
-def prep_record(time, zone, actual, target):
-    record_actual = {
-        "measurement": "zone_temp.actual",
-        "tags": {
-            "zone": zone,
-        },
-        "time": time,
-        "fields": {
-            "value": float(actual) if actual is not None else None
-        }
-    } if actual is not None else None
-
-    if target == '' or target == -1:
-        print "setting target to: -1 for %s" % zone
-        target = -1.0
-
-    record_target = {
-        "measurement": "zone_temp.target",
-        "tags": {
-            "zone": zone,
-        },
-        "time": time,
-        "fields": {
-            "value": float(target) if target is not None else None
-        }
-    } if target is not None else None
-
-    record_delta = None
-    if record_actual is not None and record_target is not None:
-
-        record_delta = {
-            "measurement": "zone_temp.delta",
-            "tags": {
-                "zone": zone,
-            },
-            "time": time,
-            "fields": {
-                "value": float(actual - target)
-            }
-        }
-
-    return record_actual, record_target, record_delta
-
-
-influx_client = InfluxDBClient(influx_host, influx_port, influx_user, influx_password, db_name)
-
 
 client = EvohomeClient(username, password, debug=False)
 
@@ -77,7 +25,7 @@ def temperatures(client, location=None):
                     'id': dhw['dhwId'],
                     'name': '_DHW',
                     'temp': dhw['temperatureStatus']['temperature'],
-                    'target': -1
+                    'target': dhw_target
                   }
 
         for zone in status['gateways'][0]['temperatureControlSystems'][0]['zones']:
@@ -124,31 +72,3 @@ fp.close()
 
 print ts
 pprint(result)
-
-# now write the data to influxdb
-data = []
-time = row[0]
-
-for zone_num in range(0,13):
-
-    temp_actual = row[zone_num*2 + 1]
-    temp_target = row[zone_num*2 + 2]
-    zone_name = zones[zone_num]
-
-    record_actual, record_target, record_delta = prep_record(time, zone_name, temp_actual, temp_target)
-
-    if record_actual:
-        data.append(record_actual)
-    if record_target:
-        data.append(record_target)
-    if record_delta:
-        data.append(record_delta)
-
-    print "%s : %s (%s, %s)" % (time, zone_name, temp_actual, temp_target)
-
-try:
-    influx_client.write_points(data)
-except InfluxDBClientError as e:
-    print e
-    # import ipdb; ipdb.set_trace()
-
