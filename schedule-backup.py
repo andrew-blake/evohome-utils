@@ -14,6 +14,6 @@ except:
 client = EvohomeClient(username, password, debug=True)
 
 today = datetime.today().date()
-filename = './backup-%s-%s-%s-b.json' % (today.year, today.month, today.day)
+filename = './backup-%d-%02d-%02d.json' % (today.year, today.month, today.day)
 
 client.zone_schedules_backup(filename)
