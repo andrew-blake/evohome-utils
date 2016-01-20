@@ -59,8 +59,8 @@ def prep_record(time, zone, actual, target):
                     "value": float(actual)
                 }
             }
-        except:
-            pass
+        except Exception as e:
+            print e
 
     if target is not None and target != '':
         try:
@@ -74,8 +74,8 @@ def prep_record(time, zone, actual, target):
                     "value": float(target)
                 }
             }
-        except:
-            pass
+        except Exception as e:
+            print e
 
     if record_actual is not None and record_target is not None:
         record_delta = {
