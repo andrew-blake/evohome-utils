@@ -16,7 +16,7 @@ def log_to_influx(zone_details):
 
     data = []
     ts = datetime.utcnow()
-    ts = ts.replace(second=0, microsecond=0)
+    ts = ts.replace(microsecond=0)
 
     for zone in zone_details:
 

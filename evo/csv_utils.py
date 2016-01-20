@@ -14,7 +14,7 @@ def log_to_csv(zone_details, filename):
     writer = csv.writer(fp)
 
     ts = datetime.utcnow()
-    ts = ts.replace(second=0, microsecond=0)
+    ts = ts.replace(microsecond=0)
 
     result = {}
 
