@@ -65,34 +65,34 @@ def client_set_zone_schedule(zone_id, zone_info):
 
 
 switch_points_hall_landing = [
-        { "TimeOfDay": "06:01:00", "TargetTemperature": 20.0, },
-        { "TimeOfDay": "08:30:00", "TargetTemperature": 20.0, },
-        { "TimeOfDay": "16:00:00", "TargetTemperature": 20.0, },
-        { "TimeOfDay": "19:00:00", "TargetTemperature": 20.0, },
+        { "TimeOfDay": "06:00:00", "TargetTemperature": 18.0, },
+        { "TimeOfDay": "08:30:00", "TargetTemperature": 18.0, },
+        { "TimeOfDay": "16:00:00", "TargetTemperature": 18.0, },
+        { "TimeOfDay": "19:00:00", "TargetTemperature": 18.0, },
         { "TimeOfDay": "22:30:00", "TargetTemperature": 16.0, },
     ]
 
 switch_points = [
-        { "TimeOfDay": "06:01:00", "TargetTemperature": 21.0, },
-        { "TimeOfDay": "08:30:00", "TargetTemperature": 21.0, },
-        { "TimeOfDay": "16:00:00", "TargetTemperature": 21.0, },
-        { "TimeOfDay": "19:00:00", "TargetTemperature": 21.0, },
-        { "TimeOfDay": "22:30:00", "TargetTemperature": 18.0, },
+        { "TimeOfDay": "06:00:00", "TargetTemperature": 20.0, },
+        { "TimeOfDay": "08:30:00", "TargetTemperature": 18.0, },
+        { "TimeOfDay": "16:00:00", "TargetTemperature": 18.0, },
+        { "TimeOfDay": "19:00:00", "TargetTemperature": 20.0, },
+        { "TimeOfDay": "22:30:00", "TargetTemperature": 20.0, },
     ]
 
 switch_points_top_floor = [
-        { "TimeOfDay": "06:01:00", "TargetTemperature": 20.0, },
-        { "TimeOfDay": "08:30:00", "TargetTemperature": 20.0, },
-        { "TimeOfDay": "16:00:00", "TargetTemperature": 20.0, },
+        { "TimeOfDay": "06:00:00", "TargetTemperature": 20.0, },
+        { "TimeOfDay": "08:30:00", "TargetTemperature": 18.0, },
+        { "TimeOfDay": "16:00:00", "TargetTemperature": 18.0, },
         { "TimeOfDay": "19:00:00", "TargetTemperature": 20.0, },
-        { "TimeOfDay": "22:30:00", "TargetTemperature": 18.0, },
+        { "TimeOfDay": "22:30:00", "TargetTemperature": 20.0, },
     ]
 
 switch_points_edward = [
-        { "TimeOfDay": "06:01:00", "TargetTemperature": 21.0, },
-        { "TimeOfDay": "08:30:00", "TargetTemperature": 21.0, },
-        { "TimeOfDay": "16:00:00", "TargetTemperature": 21.0, },
-        { "TimeOfDay": "19:00:00", "TargetTemperature": 21.0, },
+        { "TimeOfDay": "06:00:00", "TargetTemperature": 20.0, },
+        { "TimeOfDay": "08:30:00", "TargetTemperature": 18.0, },
+        { "TimeOfDay": "16:00:00", "TargetTemperature": 18.0, },
+        { "TimeOfDay": "19:00:00", "TargetTemperature": 20.0, },
         { "TimeOfDay": "22:30:00", "TargetTemperature": 20.0, },
     ]
 
